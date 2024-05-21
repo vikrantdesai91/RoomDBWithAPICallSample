@@ -1,13 +1,11 @@
 package com.example.roomdbwithapicall.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.roomdbwithapicall.R
+import androidx.fragment.app.Fragment
 import com.example.roomdbwithapicall.databinding.FragmentUserDetailsBinding
-import com.example.roomdbwithapicall.databinding.FragmentUserListBinding
 
 class UserDetailsFragment : Fragment() {
 
