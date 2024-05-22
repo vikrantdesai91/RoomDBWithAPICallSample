@@ -14,7 +14,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String","BASE_URL","\"https://reqres.in/api\"")
+        buildConfigField("String","BASE_URL","\"https://reqres.in/api/\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -61,8 +61,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.compiler.v250)
+    /*implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.compiler.v250)*/
     kapt(libs.room.compiler)
     implementation (libs.coil)
 }
