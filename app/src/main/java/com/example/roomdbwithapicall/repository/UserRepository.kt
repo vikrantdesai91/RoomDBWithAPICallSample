@@ -1,15 +1,19 @@
 package com.example.roomdbwithapicall.repository
 
-import com.example.roomdbwithapicall.model.UsersResponse
+import com.example.roomdbwithapicall.model.UsersModel
 import com.example.roomdbwithapicall.network.ApiClient
+import com.example.roomdbwithapicall.network.ApiServices
+import retrofit2.Response
 
 class UserRepository {
 
-    private val userApiServices by lazy {
-        ApiClient.getApiServices()
+    private var retrofitClientInterface: ApiServices? = null
+
+    init {
+        retrofitClientInterface = ApiClient.getRetrofitClient().create(ApiServices::class.java)
     }
 
-    suspend fun getUsersDetails(): UsersResponse {
-        return userApiServices.getUsersDetails()
+    suspend fun fetchUserList(): Response<UsersModel?>? {
+        return retrofitClientInterface?.getUsersDetails()
     }
 }

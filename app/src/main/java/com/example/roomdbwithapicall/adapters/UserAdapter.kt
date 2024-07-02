@@ -7,32 +7,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.roomdbwithapicall.databinding.ItemUserListBinding
-import com.example.roomdbwithapicall.model.UsersResponse
+import com.example.roomdbwithapicall.databinding.ItemViewBinding
+import com.example.roomdbwithapicall.model.UsersModel
 
-class UserAdapter() :
-    ListAdapter<UsersResponse.User, UserAdapter.UserViewHolder>(UserDiffCallback) {
+class UserAdapter(
+    private var usersList: List<UsersModel.User>?,
+    private var userCallback: UserCallback
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    inner class UserViewHolder(private val binding: ItemUserListBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        /*init {
-            binding.root.setOnClickListener {
-                val movie = getItem(adapterPosition)
-            }
-        }*/
-
-        fun bind(user: UsersResponse.User) {
-            binding.apply {
-                tvPhone.text = user.phone
-                tvFullName.text = user.firstName.plus(" ").plus(user.lastName)
-                ivUser.load(user.image)
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return UserViewHolder(
-            ItemUserListBinding.inflate(
+            ItemViewBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -40,20 +25,37 @@ class UserAdapter() :
         )
     }
 
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val movie = getItem(position)
-        holder.bind(movie)
+    private class UserViewHolder(inflate: ItemViewBinding) :
+        RecyclerView.ViewHolder(inflate.root) {
+        val b: ItemViewBinding = inflate
     }
 
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is UserViewHolder) {
+            usersList?.get(position)?.let {user ->
+                holder.b.tvEmail.text = user.phone
+                holder.b.tvFullname.text = user.firstName.plus(" ").plus(user.lastName)
+                holder.b.ivProfile.load(user.image)
 
-    object UserDiffCallback : DiffUtil.ItemCallback<UsersResponse.User>() {
-        override fun areItemsTheSame(oldItem: UsersResponse.User, newItem: UsersResponse.User): Boolean {
-            return oldItem.id == newItem.id
-        }
+                holder.b.root.setOnClickListener {
+                    userCallback.onUserEdit(user)
+                }
+            }
 
-        override fun areContentsTheSame(oldItem: UsersResponse.User, newItem: UsersResponse.User): Boolean {
-            return oldItem == newItem
         }
+    }
+
+    override fun getItemCount(): Int {
+        return usersList?.size ?: 0
+    }
+
+    fun updateList(userList: List<UsersModel.User>?) {
+        this.usersList = userList
+        notifyDataSetChanged()
+    }
+
+    interface UserCallback {
+        fun onUserEdit(users: UsersModel.User?)
     }
 
 }
