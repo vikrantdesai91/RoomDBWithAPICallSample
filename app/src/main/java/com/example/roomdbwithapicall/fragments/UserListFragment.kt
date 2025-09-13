@@ -46,6 +46,7 @@ class UserListFragment : Fragment(), UserAdapter.UserCallback {
 
     private fun viewListener() {
         b.btnAdd.setOnClickListener {
+            b.tietSearch.setText("")
             findNavController().navigate(R.id.action_userListFragment_to_userAddFragment)
         }
     }
@@ -120,8 +121,10 @@ class UserListFragment : Fragment(), UserAdapter.UserCallback {
             putString("lastName", users?.lastName)
             putString("profile", users?.image)
             putString("phone", users?.phone)
+            putString("email", users?.email)
             putString("userID", users?.id.toString())
         }
+        b.tietSearch.setText("")
         findNavController().navigate(R.id.action_userListFragment_to_userEditFragment, bundle)
     }
 }

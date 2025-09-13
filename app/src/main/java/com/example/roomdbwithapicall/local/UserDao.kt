@@ -26,7 +26,7 @@ interface UserDao {
     @Query(" SELECT * FROM user_table")
     fun getUser(): LiveData<List<UsersModel.User>>
 
-    @Query(" update user_table SET firstName = :fName, lastName = :lName, phone = :phone where id = :id")
-    fun updateUser(fName: String, lName: String, phone: String, id: Int)
+    @Query(" update user_table SET firstName = :fName, lastName = :lName, phone = :phone, email = :email where id = :id")
+    fun updateUser(fName: String, lName: String, phone: String,email: String, id: Int)
 
 }

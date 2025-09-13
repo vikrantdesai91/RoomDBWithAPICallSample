@@ -48,7 +48,8 @@ class UserAddFragment : Fragment() {
                     b.tietFirstName.text.toString(),
                     null,
                     b.tietLastName.text.toString(),
-                    b.tietPhone.text.toString())
+                    b.tietPhone.text.toString(),
+                    b.tietEmail.text.toString())
             )
             findNavController().navigateUp()
         }

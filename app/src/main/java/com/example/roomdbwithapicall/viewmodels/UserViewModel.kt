@@ -50,10 +50,10 @@ class UserViewModel: ViewModel() {
         return userDao?.getUser()
     }
 
-    fun updateUser(fName: String, lName: String, phone: String, id: Int){
+    fun updateUser(fName: String, lName: String, phone: String, email: String, id: Int){
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                userDao?.updateUser(fName, lName, phone, id)
+                userDao?.updateUser(fName, lName, phone, email,id)
             }
         }
     }

@@ -19,5 +19,6 @@ data class UsersModel(
         @SerializedName("image") val image: String?, // https://dummyjson.com/icon/emilys/128
         @SerializedName("lastName") val lastName: String?, // Johnson
         @SerializedName("phone") val phone: String?, // +81 965-431-3024
+        @SerializedName("email") val email: String?, // emily.johnson@x.dummyjson.com
     )
 }

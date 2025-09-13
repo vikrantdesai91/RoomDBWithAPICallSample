@@ -33,7 +33,8 @@ class UserAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is UserViewHolder) {
             usersList?.get(position)?.let {user ->
-                holder.b.tvEmail.text = user.phone
+                holder.b.tvEmail.text = user.email
+                holder.b.tvPhone.text = user.phone
                 holder.b.tvFullname.text = user.firstName.plus(" ").plus(user.lastName)
                 holder.b.ivProfile.load(user.image)
 

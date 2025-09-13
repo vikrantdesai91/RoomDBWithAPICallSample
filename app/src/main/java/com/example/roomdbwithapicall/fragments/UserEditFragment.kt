@@ -23,6 +23,7 @@ class UserEditFragment : Fragment() {
     private var lastName: String? = null
     private var profile: String? = null
     private var phone: String? = null
+    private var email: String? = null
     private var userID: String? = null
     private var userDao: UserDao? = null
     private val userViewModel: UserViewModel by viewModels()
@@ -53,15 +54,17 @@ class UserEditFragment : Fragment() {
             lastName = it.getString("lastName")
             profile = it.getString("profile")
             phone = it.getString("phone")
+            email = it.getString("email")
             userID = it.getString("userID")
             Log.d(
                 "EditFragment",
-                "First Name: $firstName, Last Name: $lastName, Profile: $profile, Phone: $phone"
+                "First Name: $firstName, Last Name: $lastName, Profile: $profile, Phone: $phone, Email: $email"
             )
         }
         b.tietFirstName.setText(firstName)
         b.tietLastName.setText(lastName)
         b.tietPhone.setText(phone)
+        b.tietEmail.setText(email)
         b.ivProfile.load(profile)
         userDao = RoomDBHelper.DatabaseClient.getDatabase(requireContext()).userDao()
 
@@ -76,7 +79,7 @@ class UserEditFragment : Fragment() {
 
 
             userViewModel.updateUser(b.tietFirstName.text.toString().trim(), b.tietLastName.text.toString().trim(),
-                b.tietPhone.text.toString().trim() , userID?.toInt() ?: 0)
+                b.tietPhone.text.toString().trim() , b.tietEmail.text.toString().trim(), userID?.toInt() ?: 0)
 
             findNavController().navigateUp()
         }
